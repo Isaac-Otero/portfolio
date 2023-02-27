@@ -5,7 +5,7 @@ import profile from '../assets/Me.jpeg'
 import MouseEffect from './MouseEffect';
 import Title from './Title.js';
 import Header from './Header';
-import Reaction from '../Projects/reaction'
+import Reaction from '../projects/reaction'
 //import { getValue } from '@testing-library/user-event/dist/utils';
 const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let name= 'Isaac Otero';
