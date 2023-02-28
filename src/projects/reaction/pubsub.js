@@ -1,4 +1,4 @@
-import PubNub from "PubNub";
+import PubNub from "pubnub";
 import { createContext } from "react";
 import PubnubConfig from "./pubnub.config";
 
