@@ -22,8 +22,5 @@
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
     "start": "npm run build && node ./"
-  },
-  "devDependencies": {
-    "process": "^0.11.10"
   }
 }
