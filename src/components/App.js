@@ -18,6 +18,8 @@ class App extends Component {
     toggleDisplayBio=()=>{
         this.setState({displayBio: !this.state.displayBio});
     }
+
+    
     toggleCoolEffect=event=>{
     
         let iterations =0;

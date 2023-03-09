@@ -13,7 +13,10 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0"
   },
   "scripts": {
     "dev": "parcel src/index.html",

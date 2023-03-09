@@ -21,11 +21,11 @@ class Search extends Component {
         return (
             <div>
                 <input
+                    className="search"
                     onChange={this.updateArtistQuery}
                     onKeyPress={this.handleKeyPress}
                     placeholder='Search for an Artist'
                 />
-                <button onClick={this.searchArtist}>Search</button>
             </div>
         )
     }

@@ -26,7 +26,7 @@ class Title extends Component{
     }
 
     animateTitles=()=>{
-        this.titleInterval = setInterval(()=>{
+        this.itleInterval = setInterval(()=>{
             const titleIndex=(this.state.titleIndex+1)%TITLES.length;
             
             this.setState({titleIndex,fadeIn:true});
