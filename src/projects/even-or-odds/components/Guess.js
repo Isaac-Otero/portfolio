@@ -7,9 +7,9 @@ const Guess = ({guess,setGuessEven,setGuessOdd}) => {
         <div>
             <h3> Even or odd? Take a guess!</h3>
             <div>
-                <button style={guess ==='even' ? {border:'2px solid #43a047'}: null } onClick={setGuessEven}>Even</button>
+                <button  style={  guess ==='even' ? {border:'2px solid #43a047'}: null  } className="game-buttons" onClick={setGuessEven}>Even</button>
                 {' '}
-                <button style={guess ==='odd' ? {border:'2px solid #43a047'}: null } onClick={setGuessOdd}>Odd</button>
+                <button className="game-buttons" style={guess ==='odd' ? {border:'2px solid #43a047'}: null } onClick={setGuessOdd}>Odd</button>
             </div>
         </div>
     )

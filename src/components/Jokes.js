@@ -25,7 +25,7 @@ class Jokes extends Component{
                 <Joke joke={this.state.joke} />
                 <hr />
                 <h3> Pssssst... Want some more jokes?</h3>
-                <button onClick={this.fetchJokes}> Click me!</button>
+                <button onClick={this.fetchJokes} style={{color:'black'}}> Click me!</button>
                 {
                     this.state.jokes.map(joke =>( <Joke key={joke.id} joke={joke} />))
                 }

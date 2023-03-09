@@ -19,7 +19,7 @@ class App extends Component {
         this.setState({displayBio: !this.state.displayBio});
     }
 
-    
+
     toggleCoolEffect=event=>{
     
         let iterations =0;
@@ -66,7 +66,7 @@ class App extends Component {
                     <button onClick={this.toggleDisplayBio}> Show Less</button>
                 </div>): (
                     <div> 
-                        <button className='title-fade-in' onClick={this.toggleDisplayBio}> Read more</button>
+                        <button className='title-fade-in' onClick={this.toggleDisplayBio} style={{color:'black'}}> Read more</button>
                     </div>
                 )
              }

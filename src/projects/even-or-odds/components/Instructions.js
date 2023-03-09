@@ -14,7 +14,7 @@ const Instructions =props =>{
                 <p> Let's see how many you get right </p>
                 <p> (Face cards don't card btw)</p>
                 <br />
-                <button onClick={collapseInstructions}> Show Less</button>
+                <button onClick={collapseInstructions} style={{color:'black'}}> Show Less</button>
             </div>
         );
     }
@@ -22,7 +22,7 @@ const Instructions =props =>{
         <div>
         <h3> Instructions</h3>
         <p> Welcome to Even or odds! The game is played like this.....</p>
-        <button onClick={expandInstructions}> Read more</button>
+        <button onClick={expandInstructions} style={{color:'black'}}> Read more</button>
         </div>
     );
 }

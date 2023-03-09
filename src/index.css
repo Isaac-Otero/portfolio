@@ -3,6 +3,7 @@ body{
     font-size:20px;
     padding: 2.5%;
     font-family: "Space Mono", monospace;
+    color: white !important;
 }
 
 .profile{
@@ -16,9 +17,7 @@ h3{
     font-size: 35px;
 
 }
-button{
-    color:black;
-}
+
 
 @keyframes rotate {
       

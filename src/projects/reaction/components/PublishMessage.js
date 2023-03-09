@@ -23,10 +23,10 @@ class PublishMessage extends Component {
     render(){ 
         return(
             <div>
-                <h3> What you wanna say?</h3>
-                <input onChange={this.updateText} onKeyPress={this.handleKeyPress} />
+                <h3>  What you wanna say?</h3>
+                <input style={{color:'black'}} onChange={this.updateText} onKeyPress={this.handleKeyPress} />
                 {' '}
-                <button onClick={this.publishMessage}> Send it!</button>
+                <button onClick={this.publishMessage} style={{color:'black'}}> Send it!</button>
             </div>
         )
     }

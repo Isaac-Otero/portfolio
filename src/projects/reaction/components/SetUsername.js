@@ -7,7 +7,7 @@ const SetUsername = ({setUsername}) =>{
     return(
         <div>
             <h3>username</h3>
-            <input onChange={setUsername} />
+            <input style={{color:'black'}} onChange={setUsername} />
         </div>
     )
 };

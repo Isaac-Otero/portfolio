@@ -40,13 +40,13 @@ class App extends Component {
                             <hr />
                             <Card />
                             <hr />
-                            <button onClick={this.props.cancelGame}> End Game</button>
+                            <button style={{color:'black'}} onClick={this.props.cancelGame}> End Game</button>
                         </div>
                     ): (
                         <div> 
                             <h3> Want to play a new game?</h3>
                             <br/>
-                            <button onClick={this.startGame}> Start Game</button>
+                            <button onClick={this.startGame} style={{color:'black'}}> Start Game</button>
                             <hr />
                             <Instructions />                        
                         </div>
