@@ -1,10 +1,4 @@
-body{
-    text-align: center;
-    font-size:20px;
-    padding: 2.5%;
-    font-family: "Space Mono", monospace;
-    color: white !important;
-}
+@import "tailwindcss";
 
 .profile{
     height:400px;
@@ -13,11 +7,18 @@ body{
     animation-name: fade-in;
     animation-duration: 2s;
 }
-h3{
-    font-size: 35px;
 
+.profile-reveal{
+    position: relative;
+    display: inline-block;
 }
 
+.profile-reveal-mask{
+    position: absolute;
+    inset: 0;
+    border-radius: 100px;
+    pointer-events: none;
+}
 
 @keyframes rotate {
       
@@ -35,8 +36,7 @@ h3{
     height: 15vmax;
     aspect-ratio: 1;
  
- 
-    position: absolute;
+    position: fixed;
     left: 50%;
     top:50%;
     translate: -50% -50%;
@@ -50,6 +50,21 @@ h3{
     filter: blur(40px);
     opacity: .2;
     pointer-events: none;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.read-more-hidden{
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 500ms ease;
+}
+
+.read-more-visible{
+    opacity: 1;
+    transition: opacity 500ms ease;
 }
 
 .title-fade-out{
@@ -80,4 +95,3 @@ h3{
         opacity: 100;
     }
 }
-

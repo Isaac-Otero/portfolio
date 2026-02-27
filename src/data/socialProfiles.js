@@ -1,6 +1,6 @@
-import githubIcon from '../assets/github_icon.png';
-import linkedinIcon from '../assets/linkedin_icon.png';
-import emailIcon from '../assets/email_icon.png';
+const githubIcon = new URL('../assets/github_icon.png', import.meta.url).href;
+const linkedinIcon = new URL('../assets/linkedin_icon.png', import.meta.url).href;
+const emailIcon = new URL('../assets/email_icon.png', import.meta.url).href;
 const SOCIAL_PROFILES = [
     {
       id: 1,

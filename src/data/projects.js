@@ -1,7 +1,7 @@
-import FoodJournal from '../assets/FoodJournal.jpeg';
-import homeDrinkMe from '../assets/homeDrinkMe.jpg';
-import LoadingTightKnit from '../assets/LoadingTightKnit.jpg';
-import VrProject from '../assets/Vr-Project.jpeg';
+const FoodJournal = new URL('../assets/FoodJournal.jpeg', import.meta.url).href;
+const homeDrinkMe = new URL('../assets/homeDrinkMe.jpg', import.meta.url).href;
+const LoadingTightKnit = new URL('../assets/LoadingTightKnit.jpg', import.meta.url).href;
+const VrProject = new URL('../assets/Vr-Project.jpeg', import.meta.url).href;
 
 //screen case syntax upper case letters
 const PROJECTS=[

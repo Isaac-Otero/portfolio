@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import Projects from './Projects';
 import SocialProfiles from './SocialProfiles';
-import profile from '../assets/Me.jpeg'
+const profile = new URL('../assets/Me.jpeg', import.meta.url).href;
 import MouseEffect from './MouseEffect';
 import Title from './Title.js';
 import Header from './Header';
 import Reaction from '../projects/reaction'
+import ProfileReveal from './ProfileReveal';
+
+console.log(profile)
 //import { getValue } from '@testing-library/user-event/dist/utils';
 const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let name= 'Isaac Otero';
@@ -13,7 +16,14 @@ const trueName='Isaac Otero';
 //component are nested elements and structured together
 class App extends Component {
     
-    state = {displayBio:false, h1Effect:false};
+    state = {displayBio:false, h1Effect:false, revealReadMore: false};
+    readMoreRef = React.createRef();
+
+    handleReadMoreReveal = (isOverlapping) => {
+      if (isOverlapping !== this.state.revealReadMore) {
+        this.setState({ revealReadMore: isOverlapping });
+      }
+    };
 
     toggleDisplayBio=()=>{
         this.setState({displayBio: !this.state.displayBio});
@@ -50,33 +60,44 @@ class App extends Component {
     render(){
         //component
         return(
-            <div>
-                <MouseEffect/>
-                <img src={profile} alt='profile' className="profile"/>
+          <div className='flex w-full justify-center flex-col items-center bg-black text-white'>
+            <MouseEffect
+              targetRef={this.readMoreRef}
+              onOverlapChange={this.handleReadMoreReveal}
+            />
+            <div className=''>
+              <ProfileReveal src={profile} alt='profile' className="profile" />
+            </div>
 
-                <h1 className='title-fade-in' onMouseEnter={this.toggleCoolEffect}> {name}</h1>
-                <Title/> 
-            {   //ternary expression with ? 
-             this.state.displayBio? (<div>
+            <h1 className='title-fade-in' onMouseEnter={this.toggleCoolEffect}> {name}</h1>
+            <Title/> 
+          {   //ternary expression with ? 
+            this.state.displayBio ? (
+              <div className='text-center'>
                 <p>I love learning and I'm always looking to improve my skills.</p>
                 <p>I am currently living in San Diego after graduating from UCSD.</p>
                 <p>I grew to love to code in my undergrad as I loved the challenge and felt awesome when I could figure out programming assignments. </p>
                 <p>I love to cook, whether it be authentic Mexican dishes my mom passed down to me or new recipes of foods I love.</p>
                 <p>I like to use my free time to volunteer at my church for events, in youth outreach, and being a part of the food team.</p>
-                    <button onClick={this.toggleDisplayBio}> Show Less</button>
-                </div>): (
-                    <div> 
-                        <button className='title-fade-in' onClick={this.toggleDisplayBio} style={{color:'black'}}> Read more</button>
-                    </div>
-                )
-             }
-             <hr />
-             
-             <Projects/>
-             <hr />
-             <SocialProfiles />
-            </div>
-            
+                <button onClick={this.toggleDisplayBio}> Show Less</button>
+              </div>
+            ) : (
+              <div
+                id='read-more'
+                ref={this.readMoreRef}
+                className={this.state.revealReadMore ? 'read-more-visible' : 'read-more-hidden'}
+              >
+                <button className='title-fade-in text-white border p-2 rounded-lg' onClick={this.toggleDisplayBio}>
+                  Read more
+                </button>
+              </div>
+            )
+          }
+            <hr />
+            <Projects/>
+            <hr />
+            <SocialProfiles />
+          </div>
         )
     }
 }
