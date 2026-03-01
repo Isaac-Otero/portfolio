@@ -1,28 +1,26 @@
-import React from "react";
 import { connect } from "react-redux";
 import CreateReaction from "./CreateReaction";
 
 const MessageReactions = ({ messageReactions }) => {
-    if (!messageReactions) return null;
+  if (!messageReactions) return null;
 
-    return (
-        messageReactions.map((reaction,index )=> {
-            const{id,emoji,username}=reaction;
-
-            return(
-                <span key={id}>
-                    <em> {username}:</em> {' '}
-                    {emoji}
-                    {index!== messageReactions.length-1 ? ',':null}
-                </span>
-            )
-        })
-    )
+  return (
+    messageReactions.map((reaction,index )=> {
+      const{id,emoji,username}=reaction;
+      return(
+        <span key={id}>
+          <em> {username}:</em> {' '}
+          {emoji}
+          {index!== messageReactions.length-1 ? ',':null}
+        </span>
+      )
+    })
+  )
 }
 
 const MessageBoard = ({ messages, reactions }) => {
   return (
-    <div>
+    <div className="text-white container text-center">
       {
         messages.items.map(messageItem => {
           const { id, text, timestamp, username } = messageItem;

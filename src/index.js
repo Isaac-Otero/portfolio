@@ -10,7 +10,8 @@ import MusicMaster from './projects/music-master';
 import Reaction from "./projects/reaction";
 import EvensOrOdds from "./projects/even-or-odds";
 import './index.css';
-import Reaction from "./projects/reaction";
+import PROJECTS from "./data/projects";
+import ProjectPage from "./components/ProjectPage";
 
 
 //find div with id root
@@ -25,7 +26,13 @@ root.render(
             <Route path="/music-master" element={<Header > <MusicMaster /></Header>} />
             <Route path="/evens-or-odds" element={<Header > <EvensOrOdds /></Header>} />
             <Route path="/reaction" element={<Header > <Reaction /></Header>} />
+            {PROJECTS.map((project) => (
+              <Route
+                key={project.id}
+                path={project.route}
+                element={<Header><ProjectPage project={project} /></Header>}
+              />
+            ))}
         </Routes>
     </BrowserRouter>
 );
-

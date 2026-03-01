@@ -7,6 +7,7 @@ import Title from './Title.js';
 import Header from './Header';
 import Reaction from '../projects/reaction'
 import ProfileReveal from './ProfileReveal';
+import Doors from './Door.js';
 
 console.log(profile)
 //import { getValue } from '@testing-library/user-event/dist/utils';
@@ -94,7 +95,7 @@ class App extends Component {
             )
           }
             <hr />
-            <Projects/>
+            <Doors/>
             <hr />
             <SocialProfiles />
           </div>
