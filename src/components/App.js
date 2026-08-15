@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
-import Projects from './Projects';
 import SocialProfiles from './SocialProfiles';
 const profile = new URL('../assets/Me.jpeg', import.meta.url).href;
 import MouseEffect from './MouseEffect';
 import Title from './Title.js';
-import Header from './Header';
-import Reaction from '../projects/reaction'
 import ProfileReveal from './ProfileReveal';
-import Doors from './Door.js';
 
 console.log(profile)
 //import { getValue } from '@testing-library/user-event/dist/utils';
@@ -94,8 +90,6 @@ class App extends Component {
               </div>
             )
           }
-            <hr />
-            <Doors/>
             <hr />
             <SocialProfiles />
           </div>
