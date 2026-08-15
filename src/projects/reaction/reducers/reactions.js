@@ -11,7 +11,18 @@ const reactionsReducer = (state={},action) =>{
         const messageReactions = state[messageId];
         
         if(messageReactions){
-            return {...state,[messageId]:[...messageReactions,action.item]}}
+            if (messageReactions.some(reaction => reaction.id === action.item.id)) {
+                return state;
+            }
+
+            return {
+                ...state,
+                [messageId]: [
+                    ...messageReactions.filter(reaction => reaction.username !== action.item.username),
+                    action.item
+                ]
+            };
+        }
 
         return {...state,[messageId]:[action.item]};
     }

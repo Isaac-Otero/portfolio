@@ -17,6 +17,22 @@ class PubSub {
     publish = message =>{
         this.pubnub.publish({message, channel: MESSAGE_CHANNEL});
     }
+
+    fetchHistory = () => {
+        return new Promise(resolve => {
+            this.pubnub.history(
+                { channel: MESSAGE_CHANNEL, count: 100 },
+                (status, response) => {
+                    if (status.error || !response || !response.messages) {
+                        resolve([]);
+                        return;
+                    }
+
+                    resolve(response.messages.map(message => message.entry));
+                }
+            );
+        });
+    }
 }
 
 export const PubSubContext = createContext();

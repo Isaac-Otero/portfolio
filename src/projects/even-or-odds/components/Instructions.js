@@ -7,22 +7,19 @@ const Instructions =props =>{
 
     if(instructionsExpanded) {
         return(
-            <div> 
+            <div className="eo-instructions"> 
                 <h3> Instructions</h3>
-                <p> Welcome to Even or odds! The game is played like this </p>
-                <p> The deck is going to get shuffled. Then you have to predict whether or not the next card is either even or odd</p>
-                <p> Let's see how many you get right </p>
-                <p> (Face cards don't card btw)</p>
-                <br />
-                <button onClick={collapseInstructions} style={{color:'black'}}> Show Less</button>
+                <p>The deck is shuffled when you start. Pick whether the next card will be even or odd, then draw.</p>
+                <p>Number cards count. Face cards do not add to your score.</p>
+                <button className="eo-link-button" onClick={collapseInstructions}>Show Less</button>
             </div>
         );
     }
     return (
-        <div>
-        <h3> Instructions</h3>
-        <p> Welcome to Even or odds! The game is played like this.....</p>
-        <button onClick={expandInstructions} style={{color:'black'}}> Read more</button>
+        <div className="eo-instructions">
+        <h3>Instructions</h3>
+        <p>Guess even or odd before each draw. Correct number-card guesses grow your score.</p>
+        <button className="eo-link-button" onClick={expandInstructions}>Read more</button>
         </div>
     );
 }

@@ -16,14 +16,22 @@ const checkRecord = correctGuesses =>{
 const gameState = ({remaining,correctGuesses}) => {
     const guessText = correctGuesses === 1 ? 'guess' : 'guesses';
     const {record,isNewRecord}=checkRecord(correctGuesses);
-    const recordLabel=isNewRecord ? '🥳 NEW HIGH SCORE 🥳 ' : 'HIGHEST SCORE'
+    const recordLabel=isNewRecord ? 'New high score' : 'Highest score'
     return (
-        <div>
-            <h3>{recordLabel} </h3>
-            <h3>{record}</h3>
-            <br/>
-            <p> {remaining} cards reamining!</p>
-            <p> {correctGuesses} correct {guessText}</p>
+        <div className="eo-scoreboard">
+            <div className={isNewRecord ? 'eo-stat eo-stat-highlight' : 'eo-stat'}>
+              <span>{recordLabel}</span>
+              <strong>{record || 0}</strong>
+            </div>
+            <div className="eo-stat">
+              <span>Cards remaining</span>
+              <strong>{remaining}</strong>
+            </div>
+            <div className="eo-stat">
+              <span>Current score</span>
+              <strong>{correctGuesses}</strong>
+              <small>{guessText}</small>
+            </div>
         </div>
     )
 }

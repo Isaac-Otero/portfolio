@@ -2,10 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchDrawCard } from '../actions/deck';
 
-const DrawCard = ({ deck_id, fetchDrawCard }) => {
+const DrawCard = ({ deck_id, guess, fetchDrawCard }) => {
+  const canDraw = Boolean(deck_id && guess);
+
   return (
-    <div>
-      <button style={{color:'black'}} onClick={fetchDrawCard(deck_id)}>Draw the next card!</button>
+    <div className="eo-draw">
+      <button
+        className="eo-button eo-button-primary"
+        disabled={!canDraw}
+        onClick={fetchDrawCard(deck_id)}
+      >
+        Draw Card
+      </button>
     </div>
   )
 }
@@ -17,6 +25,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(
-  ({ deck: { deck_id } }) => ({ deck_id }),
+  ({ deck: { deck_id }, gameState: { guess } }) => ({ deck_id, guess }),
   mapDispatchToProps
 )(DrawCard);

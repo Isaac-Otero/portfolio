@@ -1,76 +1,363 @@
-
-.game-buttons{
-    color: black;
+.bg-black:has(.eo-shell) {
+    min-height: 100vh;
+    background: #101827;
 }
 
-.profile{
-    height:400px;
-    width:700px;
-    border-radius: 100px;
-    animation-name: fade-in;
-    animation-duration: 2s;
-}
-button{
-    color:black;
-}
-
-@keyframes rotate {
-      
-    from{
-        rotate: 0deg;
-    }
-
-    to{
-        rotate: 360deg;
-    }
-
+.eo-shell {
+    min-height: calc(100vh - 58px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px 56px;
+    color: #f8fafc;
+    background:
+        radial-gradient(circle at top left, rgba(239, 68, 68, 0.18), transparent 34%),
+        linear-gradient(135deg, #101827 0%, #0b3b35 52%, #171717 100%);
 }
 
-.backColor{
-    height: 15vmax;
-    aspect-ratio: 1;
+.eo-panel {
+    width: min(1040px, 100%);
+    min-height: min(760px, calc(100vh - 120px));
+    display: grid;
+    align-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: rgba(9, 15, 25, 0.82);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+    padding: 28px;
+}
+
+.eo-error {
+    text-align: center;
+}
+
+.eo-header {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.eo-kicker {
+    margin: 0;
+    color: #86efac;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.eo-header h2 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 4.6rem);
+    line-height: 0.95;
+}
+
+.eo-subtitle {
+    max-width: 620px;
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 1rem;
+}
+
+.eo-game-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(170px, 0.7fr) minmax(260px, 1.2fr) minmax(220px, 0.8fr);
+    gap: 20px;
+    align-items: stretch;
+}
+
+.eo-scoreboard,
+.eo-controls,
+.eo-table,
+.eo-start,
+.eo-instructions {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.72);
+}
+
+.eo-scoreboard {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+    padding: 16px;
+}
+
+.eo-stat {
+    display: grid;
+    gap: 4px;
+    padding: 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.eo-stat span,
+.eo-stat small {
+    color: #94a3b8;
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.eo-stat strong {
+    color: #f8fafc;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.eo-stat-highlight {
+    background: rgba(134, 239, 172, 0.12);
+    border: 1px solid rgba(134, 239, 172, 0.44);
+}
+
+.eo-table {
+    position: relative;
+    min-height: 390px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(circle, rgba(20, 184, 166, 0.22), rgba(15, 23, 42, 0.88) 64%);
+    background-size: 34px 34px, 34px 34px, auto;
+}
+
+.eo-card-stage {
+    display: grid;
+    place-items: center;
+    gap: 16px;
+    perspective: 1200px;
+}
+
+.eo-playing-card,
+.eo-card-flip {
+    width: clamp(155px, 22vw, 220px);
+    aspect-ratio: 226 / 314;
+    border-radius: 8px;
+}
+
+.eo-card-flip {
+    position: relative;
+    transform-style: preserve-3d;
+    animation: eo-card-deal 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.eo-playing-card {
+    display: grid;
+    place-items: center;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
+}
+
+.eo-card-face {
     position: absolute;
-    left: 50%;
-    top:50%;
-    translate: -50% -50%;
-    border-radius: 50%;
-    background: linear-gradient(
-        to right,
-        aquamarine,
-        mediumpurple
-    );
-    animation: rotate 20s infinite;  
-    filter: blur(40px);
-    opacity: .2;
-    pointer-events: none;
+    inset: 0;
+    backface-visibility: hidden;
 }
 
-.title-fade-out{
-    opacity: 0;
-    animation-name: fade-out;
-    animation-duration: 2s;
-}
-.title-fade-in{
-    opacity: 100;
-    animation-name: fade-in;
-    animation-duration: 2s;
+.eo-card-face-front {
+    transform: rotateY(180deg);
+    background: #f8fafc;
 }
 
-@keyframes fade-out {
-    from{
-        opacity: 100;
-    }
-    to{
+.eo-card-face-front img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 8px;
+}
+
+.eo-card-back {
+    border: 8px solid #f8fafc;
+    background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.3) 25%, transparent 25%) -12px 0 / 24px 24px,
+        linear-gradient(225deg, rgba(15, 23, 42, 0.3) 25%, transparent 25%) -12px 0 / 24px 24px,
+        linear-gradient(315deg, rgba(15, 23, 42, 0.3) 25%, transparent 25%) 0 0 / 24px 24px,
+        linear-gradient(45deg, rgba(15, 23, 42, 0.3) 25%, #be123c 25%) 0 0 / 24px 24px;
+}
+
+.eo-card-back-inner {
+    width: 68%;
+    height: 78%;
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(255, 255, 255, 0.78);
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.18);
+}
+
+.eo-card-back-inner span {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 900;
+}
+
+.eo-card-caption {
+    min-height: 24px;
+    margin: 0;
+    color: #dbeafe;
+    font-weight: 800;
+    text-align: center;
+}
+
+.eo-controls {
+    display: grid;
+    gap: 18px;
+    align-content: center;
+    padding: 18px;
+}
+
+.eo-guess {
+    display: grid;
+    gap: 10px;
+}
+
+.eo-guess h3,
+.eo-instructions h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.eo-segmented {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.eo-choice,
+.eo-button,
+.eo-link-button {
+    min-height: 44px;
+    border: 0;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.eo-choice {
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.eo-choice-active {
+    color: #052e2b;
+    border-color: #86efac;
+    background: #86efac;
+}
+
+.eo-button {
+    width: 100%;
+    color: #052e2b;
+    background: #86efac;
+}
+
+.eo-button-secondary {
+    color: #f8fafc;
+    border: 1px solid rgba(248, 250, 252, 0.24);
+    background: transparent;
+}
+
+.eo-button:disabled {
+    color: #64748b;
+    cursor: not-allowed;
+    background: rgba(148, 163, 184, 0.28);
+}
+
+.eo-choice:not(:disabled):hover,
+.eo-button:not(:disabled):hover,
+.eo-link-button:hover {
+    transform: translateY(-1px);
+}
+
+.eo-start {
+    display: grid;
+    gap: 20px;
+    width: min(560px, 100%);
+    margin: 0 auto;
+    padding: 18px;
+}
+
+.eo-instructions {
+    display: grid;
+    gap: 10px;
+    padding: 16px;
+    color: #cbd5e1;
+}
+
+.eo-instructions p {
+    margin: 0;
+}
+
+.eo-link-button {
+    width: max-content;
+    min-height: 0;
+    padding: 0;
+    color: #86efac;
+    background: transparent;
+}
+
+@keyframes eo-card-deal {
+    0% {
         opacity: 0;
+        transform: translateY(-34px) rotateZ(-7deg) rotateY(0deg) scale(0.92);
+    }
+
+    45% {
+        opacity: 1;
+        transform: translateY(0) rotateZ(2deg) rotateY(0deg) scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateZ(0deg) rotateY(180deg) scale(1);
     }
 }
 
-@keyframes fade-in {
-    from{
-        opacity: 0;
+@media (max-width: 850px) {
+    .eo-shell {
+        align-items: flex-start;
     }
-    to{
-        opacity: 100;
+
+    .eo-panel {
+        min-height: auto;
+        align-content: start;
+        padding: 20px;
+    }
+
+    .eo-game-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .eo-scoreboard {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .eo-table {
+        min-height: 340px;
     }
 }
 
+@media (max-width: 560px) {
+    .eo-shell {
+        padding: 16px 10px 36px;
+    }
+
+    .eo-panel {
+        padding: 16px;
+    }
+
+    .eo-scoreboard {
+        grid-template-columns: 1fr;
+    }
+
+    .eo-stat strong {
+        font-size: 1.6rem;
+    }
+}

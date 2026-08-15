@@ -19,42 +19,44 @@ class App extends Component {
     render(){
         if(this.props.fetchState===fetchStates.error){
             return (
-                <div>
+                <div className="eo-shell">
+                  <div className="eo-panel eo-error">
                     <p> Please try reloading the app as an error as has occurred</p>
                     <p>{this.props.message}</p>
+                  </div>
                 </div>
             )
         }
         return(
-            <div>
-                <h2>♡ ♤ Evens or Odds ♢ ♧</h2>
+            <main className="eo-shell">
+              <section className="eo-panel">
+                <div className="eo-header">
+                  <p className="eo-kicker">Card Prediction</p>
+                  <h2>Evens or Odds</h2>
+                  <p className="eo-subtitle">Pick a side, draw a card, and build the longest correct streak you can.</p>
+                </div>
                 {
                     this.props.gameStarted ? (
-                        <div>
-                            <h3> Game has started!</h3>
+                        <div className="eo-game-grid">
                             <GameState />
-                            <br />
-                            <Guess />
-                            <br />
-                            <DrawCard />
-                            <hr />
-                            <Card />
-                            <hr />
-                            <button style={{color:'black'}} onClick={this.props.cancelGame}> End Game</button>
+                            <div className="eo-table">
+                              <Card />
+                            </div>
+                            <div className="eo-controls">
+                              <Guess />
+                              <DrawCard />
+                              <button className="eo-button eo-button-secondary" onClick={this.props.cancelGame}>End Game</button>
+                            </div>
                         </div>
                     ): (
-                        <div> 
-                            <h3> Want to play a new game?</h3>
-                            <br/>
-                            <button onClick={this.startGame} style={{color:'black'}}> Start Game</button>
-                            <hr />
+                        <div className="eo-start"> 
+                            <button className="eo-button eo-button-primary" onClick={this.startGame}>Start Game</button>
                             <Instructions />                        
                         </div>
-                        
-
                     )
                 }
-            </div>
+              </section>
+            </main>
         )
     }
 }

@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+html,
+body,
+#root{
+    min-height: 100%;
+    background: #000;
+}
+
 .profile{
     height:400px;
     width:700px;
@@ -66,6 +73,152 @@ body{
 .read-more-visible{
     opacity: 1;
     transition: opacity 500ms ease;
+}
+
+.door-section{
+    width: 100%;
+    padding: 26px 16px 38px;
+}
+
+.door-section h2{
+    margin: 0 0 28px;
+    color: #f8fafc;
+    font-size: clamp(2rem, 6vw, 3.75rem);
+    line-height: 1;
+    text-align: center;
+}
+
+.door-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    width: min(1100px, 100%);
+    margin: 0 auto;
+}
+
+.door-card{
+    display: grid;
+    justify-items: center;
+}
+
+.door-link{
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    color: #f8fafc;
+    text-decoration: none;
+    outline: none;
+}
+
+.door-image{
+    width: min(100%, 240px);
+    aspect-ratio: 400 / 331;
+    display: block;
+    object-fit: contain;
+    transform-origin: 50% 100%;
+    filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.46));
+    transition: filter 180ms ease;
+}
+
+.door-title{
+    min-height: 48px;
+    display: grid;
+    place-items: center;
+    color: #f8fafc;
+    font-weight: 800;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.door-link:hover .door-image,
+.door-link:focus-visible .door-image{
+    animation: door-knock-open 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.58));
+}
+
+.door-link:hover .door-title,
+.door-link:focus-visible .door-title{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.door-link:focus-visible{
+    border-radius: 8px;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.34);
+}
+
+@keyframes door-knock-open {
+    0% {
+        transform: perspective(650px) rotateY(0deg) translateY(0) scale(1);
+    }
+
+    18% {
+        transform: perspective(650px) rotateY(-8deg) translateY(-2px) scale(1.02);
+    }
+
+    42% {
+        transform: perspective(650px) rotateY(18deg) translateY(-5px) scale(1.04);
+    }
+
+    68% {
+        transform: perspective(650px) rotateY(-4deg) translateY(-3px) scale(1.03);
+    }
+
+    100% {
+        transform: perspective(650px) rotateY(12deg) translateY(-4px) scale(1.04);
+    }
+}
+
+.social-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 16px 36px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.social-section h2{
+    margin: 0;
+    color: #f8fafc;
+    font-size: clamp(2rem, 6vw, 3.75rem);
+    line-height: 1;
+    text-align: center;
+}
+
+.social-links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.social-link{
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: #f8fafc;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.social-link:hover{
+    transform: translateY(-2px);
+    background: #e2e8f0;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+}
+
+.social-link img{
+    width: 28px;
+    height: 28px;
+    display: block;
+    object-fit: contain;
 }
 
 .title-fade-out{

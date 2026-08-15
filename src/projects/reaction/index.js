@@ -4,25 +4,51 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import PubSub,{PubSubContext} from './pubsub';
 import App from './components/App';
-import { newMessage } from './actions/messages';
 import './index.css';
 
+const savedStateKey = 'REACTION_CHAT_STATE';
 
-const store =createStore(rootReducer);
+const loadState = () => {
+    try {
+        const savedState = localStorage.getItem(savedStateKey);
+        return savedState ? JSON.parse(savedState) : undefined;
+    } catch (error) {
+        return undefined;
+    }
+};
+
+const saveState = state => {
+    try {
+        const { messages, reactions, username } = state;
+        localStorage.setItem(savedStateKey, JSON.stringify({ messages, reactions, username }));
+    } catch (error) {
+        // Ignore storage failures so live chat still works.
+    }
+};
+
+const store = createStore(rootReducer, loadState());
 
 const pubsub = new PubSub();
 
 pubsub.addListener({
     message: messageObject =>{
         const{message,channel} = messageObject;
-        console.log ('Received Message', message, 'channel', channel);
-        store.dispatch(message);
+        console.log('Received Message', message, 'channel', channel);
+        if (message && message.type) {
+            store.dispatch(message);
+        }
     }
 });
 
-setTimeout(()=>{
-    pubsub.publish(newMessage({text:'Hello world :)',username:'Bob'}));
-},1000);
+pubsub.fetchHistory().then(messages => {
+    messages.forEach(message => {
+        if (message && message.type) {
+            store.dispatch(message);
+        }
+    });
+});
+
+store.subscribe(() => saveState(store.getState()));
 
 const Reaction =() =>{
     return (
@@ -36,4 +62,3 @@ const Reaction =() =>{
 
 export default Reaction;
   
-

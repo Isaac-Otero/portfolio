@@ -3,11 +3,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { setUsername } from "../actions/username";
 
-const SetUsername = ({setUsername}) =>{
+const SetUsername = ({username,setUsername}) =>{
   return(
-    <div className="text-white justify-center items-center text-center">
-      <h3>Enter in a username</h3>
-      <input className="text-white border rounded-lg" onChange={setUsername} />
+    <div className="reaction-identity">
+      <label htmlFor="reaction-username">Username</label>
+      <input
+        id="reaction-username"
+        value={username}
+        onChange={setUsername}
+      />
     </div>
   )
 };
@@ -18,4 +22,4 @@ const mapDispatchToProps = dispatch =>{
   }
 }
 
-export default connect(null,mapDispatchToProps)(SetUsername);
+export default connect(({ username }) => ({ username }),mapDispatchToProps)(SetUsername);

@@ -12,20 +12,27 @@ class PublishMessage extends Component {
     const{text}=this.state;
     const{username}=this.props;
 
-    this.context.pubsub.publish(newMessage({text:this.state.text,username}));
+    if (!text.trim()) return;
+
+    this.context.pubsub.publish(newMessage({text:text.trim(),username}));
+    this.setState({text:''});
   }
 
-  handleKeyPress = event =>{
+  handleKeyDown = event =>{
     if(event.key ==='Enter') this.publishMessage();
   }
   
   render(){ 
     return(
-      <div className="text-center text-white">
-        <h3>What do you want to say?</h3>
-        <input className="border rounded-lg text-white" onChange={this.updateText} onKeyPress={this.handleKeyPress} />
-        {' '} 
-        <button onClick={this.publishMessage}> Send it!</button>
+      <div className="reaction-composer">
+        <input
+          aria-label="Message"
+          placeholder="Message"
+          value={this.state.text}
+          onChange={this.updateText}
+          onKeyDown={this.handleKeyDown}
+        />
+        <button onClick={this.publishMessage}>Send</button>
       </div>
     )
   }

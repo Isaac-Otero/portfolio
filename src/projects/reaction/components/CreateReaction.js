@@ -14,17 +14,17 @@ class CreateReaction extends Component {
 
     render() {
         return (
-            <div>
+            <div className="reaction-picker" aria-label="Add a reaction">
                 {
                     REACTION_OBJECTS.map(REACTION_OBJECT => {
                         const { type, emoji } = REACTION_OBJECT;
 
                         return (
-                            <span
+                            <button
+                                type="button"
                                 onClick={this.publishReaction({ type, emoji })}
-                                style={{ margin: '5px', cursor: 'pointer' }}
                                 key={type}
-                            >{emoji} </span>
+                            >{emoji}</button>
                         )
                     })
                 }
