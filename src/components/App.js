@@ -4,6 +4,7 @@ const profile = new URL('../assets/Me.jpeg', import.meta.url).href;
 import MouseEffect from './MouseEffect';
 import Title from './Title.js';
 import ProfileReveal from './ProfileReveal';
+const doorStill = new URL('../assets/door-still.png', import.meta.url).href;
 
 console.log(profile)
 //import { getValue } from '@testing-library/user-event/dist/utils';
@@ -13,7 +14,14 @@ const trueName='Isaac Otero';
 //component are nested elements and structured together
 class App extends Component {
     
-    state = {displayBio:false, h1Effect:false, revealReadMore: false};
+    state = {
+      displayBio:false,
+      h1Effect:false,
+      revealReadMore: false,
+      revealDoor: false,
+      doorTiltX: 0,
+      doorTiltY: 0
+    };
     readMoreRef = React.createRef();
 
     handleReadMoreReveal = (isOverlapping) => {
@@ -26,6 +34,24 @@ class App extends Component {
         this.setState({displayBio: !this.state.displayBio});
     }
 
+    revealHiddenDoor=()=>{
+        this.setState({revealDoor: true});
+    }
+
+    handleDoorMove=(event)=>{
+        const rect = event.currentTarget.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+        this.setState({
+          doorTiltX: y * -18,
+          doorTiltY: x * 22
+        });
+    }
+
+    resetDoorTilt=()=>{
+        this.setState({doorTiltX: 0, doorTiltY: 0});
+    }
 
     toggleCoolEffect=event=>{
     
@@ -87,9 +113,36 @@ class App extends Component {
                 <button className='title-fade-in text-white border p-2 rounded-lg' onClick={this.toggleDisplayBio}>
                   Read more
                 </button>
+                <button className='cloud-discovery-button' onClick={this.revealHiddenDoor}>
+                  What's this?
+                </button>
               </div>
             )
           }
+            {this.state.revealDoor && (
+              <div className='hidden-door-stage' aria-label='Hidden door discovery'>
+                <div className='spark-field' aria-hidden='true'>
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div className='hidden-door-pop'>
+                  <img
+                    src={doorStill}
+                    alt='Hidden door'
+                    className='hidden-door-image'
+                    onMouseMove={this.handleDoorMove}
+                    onMouseLeave={this.resetDoorTilt}
+                    style={{
+                      transform: `perspective(720px) rotateX(${this.state.doorTiltX}deg) rotateY(${this.state.doorTiltY}deg)`
+                    }}
+                  />
+                </div>
+              </div>
+            )}
             <hr />
             <SocialProfiles />
           </div>
