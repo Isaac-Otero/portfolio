@@ -1,20 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Header = ({children}) => {
-  const style = {
-    display: 'inline-block',
-    margin: 10,
-    marginBottom: 30
-  };
+  const links = [
+    { to: '/', label: 'Home' },
+    { to: '/summer-over-under', label: 'Summer Over/Under' },
+    { to: '/japanese-drill', label: 'Japanese Drill' },
+    { to: '/evens-or-odds', label: 'Evens or Odds' },
+    { to: '/reaction', label: 'Messaging Board' }
+  ];
 
   return (
     <div className="bg-black">
-      <div className="container flex justify-center items-center text-nowrap">
-        <h3 style={style}><Link to='/'>Home</Link></h3>
-        <h3 style={style}> <Link to='/evens-or-odds'>Evens or Odds</Link> </h3>
-        <h3 style={style}> <Link to='/reaction'> Messaging Board</Link> </h3>
-      </div>
+      <nav className="top-nav" aria-label="Portfolio navigation">
+        {links.map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            end={link.to === '/'}
+            className={({ isActive }) => `top-nav-link${isActive ? ' active' : ''}`}
+          >
+            {link.label}
+          </NavLink>
+        ))}
+      </nav>
       {children}
     </div>
   )
