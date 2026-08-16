@@ -32,13 +32,27 @@ class MouseEffect extends Component {
 
     const targetRect = targetEl.getBoundingClientRect();
     const effectRect = effectEl.getBoundingClientRect();
-
-    const isOverlapping = !(
-      effectRect.right < targetRect.left ||
-      effectRect.left > targetRect.right ||
-      effectRect.bottom < targetRect.top ||
-      effectRect.top > targetRect.bottom
+    const overlapWidth = Math.max(
+      0,
+      Math.min(effectRect.right, targetRect.right) - Math.max(effectRect.left, targetRect.left)
     );
+    const overlapHeight = Math.max(
+      0,
+      Math.min(effectRect.bottom, targetRect.bottom) - Math.max(effectRect.top, targetRect.top)
+    );
+    const overlapArea = overlapWidth * overlapHeight;
+    const effectArea = effectRect.width * effectRect.height;
+    const targetArea = targetRect.width * targetRect.height;
+    const overlapRatio = Math.min(
+      effectArea && overlapArea / effectArea,
+      targetArea && overlapArea / targetArea
+    );
+    const revealThreshold = this.props.revealThreshold || 0.34;
+    const hideThreshold = this.props.hideThreshold || 0.16;
+
+    const isOverlapping = this.state.isOverlapping
+      ? overlapRatio > hideThreshold
+      : overlapRatio >= revealThreshold;
 
     if (isOverlapping !== this.state.isOverlapping) {
       this.setState({ isOverlapping });

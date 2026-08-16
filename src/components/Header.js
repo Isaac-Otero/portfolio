@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 const Header = ({children}) => {
   const links = [
     { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
     { to: '/summer-over-under', label: 'Summer Over/Under' },
     { to: '/japanese-drill', label: 'Japanese Drill' },
     { to: '/evens-or-odds', label: 'Evens or Odds' },

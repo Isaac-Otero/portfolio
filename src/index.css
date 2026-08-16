@@ -443,51 +443,166 @@ body{
     transition: opacity 500ms ease;
 }
 
-.cloud-discovery-button{
-    display: block;
-    margin: 14px auto 0;
-    border: 0;
-    border-radius: 999px;
-    padding: 10px 18px;
-    color: #0f172a;
-    background:
-        radial-gradient(circle at 18% 35%, #ffffff 0 18%, transparent 19%),
-        radial-gradient(circle at 38% 20%, #ffffff 0 20%, transparent 21%),
-        radial-gradient(circle at 62% 30%, #ffffff 0 19%, transparent 20%),
-        radial-gradient(circle at 82% 45%, #ffffff 0 16%, transparent 17%),
-        #e0f2fe;
-    box-shadow:
-        0 10px 28px rgba(56, 189, 248, 0.24),
-        inset 0 -2px 0 rgba(15, 23, 42, 0.08);
-    font-weight: 900;
-    cursor: pointer;
-    transition: transform 180ms ease, box-shadow 180ms ease;
+.home-cloud-about-zone{
+    position: relative;
+    width: 330px;
+    min-height: 190px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto -18px;
+    padding: 28px 40px 34px;
 }
 
-.cloud-discovery-button:hover,
-.cloud-discovery-button:focus-visible{
-    transform: translateY(-2px);
+.home-cloud-about-link{
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 250px;
+    height: 135px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    color: #334155;
+    text-decoration: none;
+    font: inherit;
+    font-weight: 1000;
+    background: transparent;
+    animation: dreamy-cloud-float 3400ms ease-in-out infinite;
+    cursor: pointer;
+    transition: transform 180ms ease, filter 180ms ease;
+    filter: drop-shadow(0 18px 28px rgba(125, 211, 252, 0.28));
+}
+
+.cloud-puffs,
+.cloud-puffs i,
+.cloud-puffs::before,
+.cloud-puffs::after{
+    position: absolute;
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.72) 62%, rgba(219, 234, 254, 0.92) 100%);
     box-shadow:
-        0 14px 34px rgba(56, 189, 248, 0.34),
-        inset 0 -2px 0 rgba(15, 23, 42, 0.08);
+        inset 0 -8px 14px rgba(147, 197, 253, 0.18),
+        inset 0 7px 12px rgba(255, 255, 255, 0.92),
+        0 0 16px rgba(244, 114, 182, 0.16);
+}
+
+.cloud-puffs{
+    inset: 0;
+    pointer-events: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.cloud-puffs::before,
+.cloud-puffs::after{
+    content: "";
+}
+
+.cloud-puffs i:nth-child(1){
+    width: 98px;
+    height: 76px;
+    left: 16px;
+    bottom: 22px;
+}
+
+.cloud-puffs i:nth-child(2){
+    width: 118px;
+    height: 104px;
+    left: 54px;
+    top: 2px;
+}
+
+.cloud-puffs i:nth-child(3){
+    width: 108px;
+    height: 92px;
+    right: 28px;
+    top: 18px;
+}
+
+.cloud-puffs i:nth-child(4){
+    width: 86px;
+    height: 68px;
+    right: 8px;
+    bottom: 26px;
+}
+
+.cloud-puffs i:nth-child(5){
+    width: 148px;
+    height: 58px;
+    left: 42px;
+    bottom: 14px;
+}
+
+.cloud-puffs i:nth-child(6){
+    width: 72px;
+    height: 54px;
+    left: 104px;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(219, 234, 254, 0.88));
+}
+
+.cloud-puffs::before{
+    width: 14px;
+    height: 14px;
+    right: 34px;
+    top: 4px;
+    background: rgba(255, 255, 255, 0.88);
+    animation: cloud-twinkle 1700ms ease-in-out infinite;
+}
+
+.cloud-puffs::after{
+    width: 9px;
+    height: 9px;
+    left: 38px;
+    bottom: 18px;
+    background: rgba(255, 255, 255, 0.82);
+    animation: cloud-twinkle 2100ms ease-in-out 360ms infinite;
+}
+
+.cloud-button-label{
+    position: relative;
+    z-index: 1;
+    display: inline-grid;
+    place-items: center;
+    min-width: 138px;
+    min-height: 42px;
+    margin-top: 14px;
+    color: #334155;
+    text-shadow: 0 1px 0 #ffffff;
+}
+
+.read-more-visible .home-cloud-about-link:hover,
+.read-more-visible .home-cloud-about-link:focus-visible{
+    transform: translateY(-4px) scale(1.03);
+    filter:
+        drop-shadow(0 24px 36px rgba(244, 114, 182, 0.24))
+        drop-shadow(0 18px 28px rgba(125, 211, 252, 0.28));
 }
 
 .hidden-door-stage{
     position: relative;
-    width: min(320px, 80vw);
-    min-height: 290px;
+    width: min(340px, 82vw);
+    min-height: 310px;
     display: grid;
     place-items: center;
-    margin: 20px auto 4px;
+    margin: 12px auto 8px;
     perspective: 900px;
 }
 
-.hidden-door-pop{
+.hidden-door-entry{
+    display: block;
+    outline: none;
     animation: hidden-door-found 1100ms cubic-bezier(0.17, 0.84, 0.28, 1.22) both;
 }
 
+.hidden-door-entry:focus-visible{
+    border-radius: 8px;
+    box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.48);
+}
+
 .hidden-door-image{
-    width: min(250px, 68vw);
+    width: min(260px, 68vw);
     display: block;
     object-fit: contain;
     transform-origin: 50% 70%;
@@ -527,6 +642,208 @@ body{
 .spark-field span:nth-child(4){left: 83%; top: 64%; animation-delay: 560ms;}
 .spark-field span:nth-child(5){left: 49%; top: 8%; animation-delay: 700ms;}
 .spark-field span:nth-child(6){left: 52%; top: 82%; animation-delay: 840ms;}
+
+.about-cloud-page{
+    position: relative;
+    min-height: calc(100vh - 74px);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    padding: 52px 16px 72px;
+    color: #334155;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.82), transparent 18%),
+        radial-gradient(circle at 78% 20%, rgba(255, 255, 255, 0.72), transparent 18%),
+        radial-gradient(circle at 22% 86%, rgba(244, 114, 182, 0.22), transparent 26%),
+        linear-gradient(135deg, #ffd8ec 0%, #e5f6ff 42%, #dbeafe 100%);
+}
+
+.about-cloud-panel{
+    position: relative;
+    z-index: 1;
+    width: min(980px, 100%);
+    display: grid;
+    grid-template-columns: minmax(210px, 300px) minmax(0, 1fr);
+    gap: 32px;
+    align-items: center;
+    padding: clamp(24px, 5vw, 48px);
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    border-radius: 8px;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.94) 0 58px, transparent 59px),
+        radial-gradient(circle at 90% 12%, rgba(255, 255, 255, 0.9) 0 74px, transparent 75px),
+        rgba(255, 255, 255, 0.68);
+    box-shadow:
+        0 32px 80px rgba(96, 165, 250, 0.22),
+        0 16px 42px rgba(244, 114, 182, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(18px);
+    animation: cloud-panel-arrive 700ms ease both;
+}
+
+.about-cloud-portrait{
+    position: relative;
+    width: min(100%, 280px);
+    aspect-ratio: 1;
+    justify-self: center;
+}
+
+.about-cloud-portrait::before{
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border-radius: 42% 58% 48% 52%;
+    background:
+        radial-gradient(circle at 28% 18%, #ffffff 0 24%, transparent 25%),
+        radial-gradient(circle at 72% 24%, #ffffff 0 22%, transparent 23%),
+        radial-gradient(circle at 52% 76%, #ffffff 0 30%, transparent 31%),
+        linear-gradient(135deg, #bfdbfe, #fbcfe8);
+    animation: dreamy-blob 5200ms ease-in-out infinite;
+}
+
+.about-cloud-portrait img{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border: 8px solid rgba(255, 255, 255, 0.86);
+    border-radius: 999px;
+    box-shadow: 0 20px 48px rgba(51, 65, 85, 0.2);
+}
+
+.about-cloud-copy{
+    display: grid;
+    gap: 14px;
+}
+
+.cloud-kicker{
+    margin: 0;
+    color: #db2777;
+    font-size: 0.82rem;
+    font-weight: 1000;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.about-cloud-copy h1{
+    margin: 0;
+    color: #1e3a8a;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    line-height: 0.9;
+}
+
+.about-cloud-copy p{
+    margin: 0;
+    color: #475569;
+    line-height: 1.7;
+    font-size: 1.03rem;
+}
+
+.cloud-tag-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.cloud-tag-row span{
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    border-radius: 999px;
+    padding: 8px 12px;
+    color: #1d4ed8;
+    background: rgba(255, 255, 255, 0.6);
+    font-weight: 900;
+    font-size: 0.9rem;
+}
+
+.cloud-back-link{
+    width: max-content;
+    margin-top: 8px;
+    border-radius: 999px;
+    padding: 11px 16px;
+    color: #ffffff;
+    background: linear-gradient(135deg, #60a5fa, #f472b6);
+    text-decoration: none;
+    font-weight: 1000;
+    box-shadow: 0 14px 30px rgba(96, 165, 250, 0.24);
+}
+
+.cloud-drift{
+    position: absolute;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    filter: blur(1px);
+    animation: cloud-drift 9000ms ease-in-out infinite;
+}
+
+.cloud-drift::before,
+.cloud-drift::after{
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+    background: rgba(255, 255, 255, 0.78);
+}
+
+.cloud-drift.c1{
+    left: 8%;
+    top: 18%;
+    width: 160px;
+    height: 54px;
+}
+
+.cloud-drift.c2{
+    right: 7%;
+    top: 32%;
+    width: 210px;
+    height: 64px;
+    animation-delay: 900ms;
+}
+
+.cloud-drift.c3{
+    left: 18%;
+    bottom: 12%;
+    width: 190px;
+    height: 58px;
+    animation-delay: 1600ms;
+}
+
+.cloud-drift::before{
+    left: 18%;
+    bottom: 24%;
+    width: 42%;
+    height: 110%;
+}
+
+.cloud-drift::after{
+    right: 16%;
+    bottom: 18%;
+    width: 34%;
+    height: 92%;
+}
+
+@keyframes dreamy-cloud-float {
+    0%, 100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -8px;
+    }
+}
+
+@keyframes cloud-twinkle {
+    0%, 100% {
+        opacity: 0.32;
+        transform: scale(0.78);
+    }
+
+    50% {
+        opacity: 0.95;
+        transform: scale(1.22);
+    }
+}
 
 @keyframes hidden-door-found {
     0% {
@@ -568,6 +885,53 @@ body{
     100% {
         opacity: 0;
         transform: scale(0.2) rotate(270deg);
+    }
+}
+
+@keyframes cloud-panel-arrive {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes dreamy-blob {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(4deg) scale(1.04);
+    }
+}
+
+@keyframes cloud-drift {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(24px);
+    }
+}
+
+@media (max-width: 800px){
+    .about-cloud-panel{
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .cloud-tag-row{
+        justify-content: center;
+    }
+
+    .cloud-back-link{
+        justify-self: center;
     }
 }
 

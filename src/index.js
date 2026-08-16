@@ -9,6 +9,7 @@ import Reaction from "./projects/reaction";
 import EvensOrOdds from "./projects/even-or-odds";
 import SummerOverUnder from "./projects/ai-showcase/SummerOverUnder";
 import JapaneseDrill from "./projects/ai-showcase/JapaneseDrill";
+import AboutCloudPage from "./components/AboutCloudPage";
 import './index.css';
 import PROJECTS from "./data/projects";
 import ProjectPage from "./components/ProjectPage";
@@ -22,6 +23,7 @@ root.render(
     <BrowserRouter history={createBrowserHistory()}>
         <Routes>
             <Route path='/' element={<Header> <App /></Header>}/>
+            <Route path="/about" element={<Header> <AboutCloudPage /></Header>} />
             <Route path="/summer-over-under" element={<Header> <SummerOverUnder /></Header>} />
             <Route path="/japanese-drill" element={<Header> <JapaneseDrill /></Header>} />
             <Route path="/evens-or-odds" element={<Header > <EvensOrOdds /></Header>} />

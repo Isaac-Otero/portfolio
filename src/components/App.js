@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import SocialProfiles from './SocialProfiles';
 const profile = new URL('../assets/Me.jpeg', import.meta.url).href;
 import MouseEffect from './MouseEffect';
@@ -15,27 +16,50 @@ const trueName='Isaac Otero';
 class App extends Component {
     
     state = {
-      displayBio:false,
       h1Effect:false,
-      revealReadMore: false,
+      revealAboutCloud: false,
       revealDoor: false,
       doorTiltX: 0,
       doorTiltY: 0
     };
-    readMoreRef = React.createRef();
+    aboutCloudRef = React.createRef();
+    doorStageRef = React.createRef();
+    hideAboutCloudTimer = null;
 
-    handleReadMoreReveal = (isOverlapping) => {
-      if (isOverlapping !== this.state.revealReadMore) {
-        this.setState({ revealReadMore: isOverlapping });
+    componentWillUnmount() {
+      if (this.hideAboutCloudTimer) {
+        window.clearTimeout(this.hideAboutCloudTimer);
+      }
+    }
+
+    handleAboutCloudReveal = (isOverlapping) => {
+      if (isOverlapping) {
+        if (this.hideAboutCloudTimer) {
+          window.clearTimeout(this.hideAboutCloudTimer);
+          this.hideAboutCloudTimer = null;
+        }
+        this.setState({ revealAboutCloud: true });
+      } else {
+        this.hideAboutCloudTimer = window.setTimeout(() => {
+          this.setState({ revealAboutCloud: false });
+          this.hideAboutCloudTimer = null;
+        }, 260);
       }
     };
 
-    toggleDisplayBio=()=>{
-        this.setState({displayBio: !this.state.displayBio});
-    }
-
     revealHiddenDoor=()=>{
-        this.setState({revealDoor: true});
+        if (this.hideAboutCloudTimer) {
+          window.clearTimeout(this.hideAboutCloudTimer);
+          this.hideAboutCloudTimer = null;
+        }
+        this.setState({revealDoor: true}, () => {
+          window.setTimeout(() => {
+            this.doorStageRef.current?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+          }, 120);
+        });
     }
 
     handleDoorMove=(event)=>{
@@ -44,8 +68,8 @@ class App extends Component {
         const y = (event.clientY - rect.top) / rect.height - 0.5;
 
         this.setState({
-          doorTiltX: y * -18,
-          doorTiltY: x * 22
+          doorTiltX: y * -23.5,
+          doorTiltY: x * 28.5
         });
     }
 
@@ -58,7 +82,7 @@ class App extends Component {
         let iterations =0;
         if(!this.state.h1Effect){
         const interval= setInterval(()=>{
-        this.setState({h1Effect: !this.state.displayBio});
+        this.setState({h1Effect: true});
         
         name=name.split("").map((letter,index)=>{
             if(index<iterations){
@@ -85,8 +109,10 @@ class App extends Component {
         return(
           <div className='flex w-full justify-center flex-col items-center bg-black text-white'>
             <MouseEffect
-              targetRef={this.readMoreRef}
-              onOverlapChange={this.handleReadMoreReveal}
+              targetRef={this.aboutCloudRef}
+              onOverlapChange={this.handleAboutCloudReveal}
+              revealThreshold={0.38}
+              hideThreshold={0.18}
             />
             <div className=''>
               <ProfileReveal src={profile} alt='profile' className="profile" />
@@ -94,33 +120,34 @@ class App extends Component {
 
             <h1 className='title-fade-in' onMouseEnter={this.toggleCoolEffect}> {name}</h1>
             <Title/> 
-          {   //ternary expression with ? 
-            this.state.displayBio ? (
-              <div className='text-center'>
-                <p>I love learning and I'm always looking to improve my skills.</p>
-                <p>I am currently living in San Diego after graduating from UCSD.</p>
-                <p>I grew to love to code in my undergrad as I loved the challenge and felt awesome when I could figure out programming assignments. </p>
-                <p>I love to cook, whether it be authentic Mexican dishes my mom passed down to me or new recipes of foods I love.</p>
-                <p>I like to use my free time to volunteer at my church for events, in youth outreach, and being a part of the food team.</p>
-                <button onClick={this.toggleDisplayBio}> Show Less</button>
-              </div>
-            ) : (
-              <div
-                id='read-more'
-                ref={this.readMoreRef}
-                className={this.state.revealReadMore ? 'read-more-visible' : 'read-more-hidden'}
+            <div
+              id='read-more'
+              ref={this.aboutCloudRef}
+              className={`home-cloud-about-zone ${this.state.revealAboutCloud ? 'read-more-visible' : 'read-more-hidden'}`}
+            >
+              <button
+                className='home-cloud-about-link'
+                type='button'
+                onClick={this.revealHiddenDoor}
+                tabIndex={this.state.revealAboutCloud ? 0 : -1}
               >
-                <button className='title-fade-in text-white border p-2 rounded-lg' onClick={this.toggleDisplayBio}>
-                  Read more
-                </button>
-                <button className='cloud-discovery-button' onClick={this.revealHiddenDoor}>
-                  What's this?
-                </button>
-              </div>
-            )
-          }
+                <span className='cloud-puffs' aria-hidden='true'>
+                  <i />
+                  <i />
+                  <i />
+                  <i />
+                  <i />
+                  <i />
+                </span>
+                <span className='cloud-button-label'>What's this?</span>
+              </button>
+            </div>
             {this.state.revealDoor && (
-              <div className='hidden-door-stage' aria-label='Hidden door discovery'>
+              <div
+                ref={this.doorStageRef}
+                className='hidden-door-stage'
+                aria-label='Hidden door discovery'
+              >
                 <div className='spark-field' aria-hidden='true'>
                   <span />
                   <span />
@@ -129,7 +156,7 @@ class App extends Component {
                   <span />
                   <span />
                 </div>
-                <div className='hidden-door-pop'>
+                <Link className='hidden-door-entry' to='/about' aria-label='Enter about page'>
                   <img
                     src={doorStill}
                     alt='Hidden door'
@@ -140,7 +167,7 @@ class App extends Component {
                       transform: `perspective(720px) rotateX(${this.state.doorTiltX}deg) rotateY(${this.state.doorTiltY}deg)`
                     }}
                   />
-                </div>
+                </Link>
               </div>
             )}
             <hr />
